@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+  labels:
+    app: flask
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask-container
+        image: vleena/python-code:flask-app
+        ports:
+        - containerPort: 5000
+        env:
+        # Define the environment variable
+        - name: ENV # Notice that the case is different here
+                                     # from the key name in the ConfigMap.
+          valueFrom:
+            configMapKeyRef:
+              name: env-map          # The ConfigMap this value comes from.
+              key: ENV
+        - name: PASSWORD # Notice that the case is different here
+                                     # from the key name in the ConfigMap.
+          valueFrom:
+            secretKeyRef:
+              name: s-name         # The ConfigMap this value comes from.
+              key: PASSWORD
+
+
+
