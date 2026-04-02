@@ -1,0 +1,56 @@
+pipeline {
+    parameters {
+        choice(name:'TerraformAction',choices:['apply','plan'],description:'Choose your terraform action:')
+    }
+    environment{
+        AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
+        AWS_ACCESS_SECRET_KEY = credentials('AWS_ACCESS_SECRET_KEY')
+    }
+
+    agent any
+    stages{
+        stage('checkout'){
+            steps {
+                script {
+                    dir ('terraform')
+                    git branch: terraform, url: 'https://github.com/Vleena/CLOUD-DEVOPS.git'
+                }
+            }
+        }
+        stage('plan'){
+            steps {
+                sh 'pwd;cd Project-1/; terraform init'
+                sh 'pwd;cd Project-1/; terraform plan -out tfplan'
+                sh 'pwd;cd Project-1/; terraform show -no-color tfplan >> tfplan.txt'
+            }
+        }
+        stage('Approval'){
+            steps{
+               script {
+                def plan = readFile 'Project-1/tfplan.txt'
+                input message: "Do you want to proceed further....?"
+                parameters: [text(name:'plan',description:'Can you review your code one more time',defaultValue: plan)]
+               }     
+            }
+        }
+        stage('Apply or destroy'){
+            when {
+                expression{
+                    return params.TerraformAction == 'apply' || params.TerraformAction == 'destroy'
+                }
+            }
+            steps{
+                script {
+                    if (params.TerraformAction == 'apply'){
+                        sh "pwd;cd Project-1/; terraform apply -input=false"
+                    } else if (params.TerraformAction == 'destroy'){
+                        sh "pwd;cd Project-1/; terraform destroy -auto-approve"
+                    }
+                }
+
+            }
+        }
+
+    }
+
+}
