@@ -11,7 +11,7 @@ pipeline{
     agent any
 
     stages{
-        stage('checkout'){ q    
+        stage('checkout'){  
             steps{
                 script {
                     dir("terraform"){
