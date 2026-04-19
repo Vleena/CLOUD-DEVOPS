@@ -4,7 +4,7 @@
 
 # Description: count the given character in the given word
 # Author: Vleena
-# Version:V1
+# Version:V2
 
 #####################
 set -eo pipefail
