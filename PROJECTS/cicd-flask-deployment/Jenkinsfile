@@ -5,7 +5,7 @@ pipeline {
             steps {
 		sshagent(['ssh-key']){
                 sh '''
-                ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes vleena1@invrhel801.informatica.com "
+                ssh -o StrictHostKeyChecking=no -o IdentitiesOnly=yes -o PreferredAuthentications=publickey vleena1@invrhel801.informatica.com "
                 cd cicd-flask-deployment &&
                 git pull &&
                 pkill -f app.py || true &&
