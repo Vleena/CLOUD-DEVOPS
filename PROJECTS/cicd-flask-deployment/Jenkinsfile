@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
+		sshagent(['ssh-key']){
                 sh '''
                 ssh -o StrictHostKeyChecking=no vleena1@10.65.190.116
                 cd cicd-flask-deployment &&
@@ -10,6 +11,7 @@ pipeline {
                 pkill -f app.py || true &&
                 nohup python3 app.py > output.log 2>&1 &
                 '''
+		}
             }
         }
     }
