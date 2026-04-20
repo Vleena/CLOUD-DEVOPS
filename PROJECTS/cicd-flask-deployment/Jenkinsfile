@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('pull Code'){
+        stage('pull Code1'){
             steps {
                 git 'https://github.com/Vleena/CLOUD-DEVOPS.git'
             }
