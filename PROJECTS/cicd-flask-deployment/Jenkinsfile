@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    stages {
+        stage('pull Code'){
+            steps {
+                git 'https://github.com/Vleena/CLOUD-DEVOPS.git'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh '''
+                ssh -o StrictHostKeyChecking=no vleena1@10.65.190.116
+                cd cicd-flask-deployment &&
+                git pull &&
+                pkill -f app.py || true &&
+                nohup python3 app.py > output.log 2>&1 &
+                '''
+            }
+        }
+    }
+}
