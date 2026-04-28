@@ -1,5 +1,5 @@
 variable "filename" {# variable name is filename
-	default ="/home/vleena1/CLOUD-DEVOPS/terraform-variable/automated.txt"
+	default ="/home/automated.txt"
 	
 }
 
