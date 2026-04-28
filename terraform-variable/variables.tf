@@ -17,3 +17,8 @@ variable "variable-type" {
 	}
 }
 
+variable "file_list" {
+	type=list
+	default=["/home/test1.txt","/home/test2.txt"]
+}
+
