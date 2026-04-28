@@ -18,3 +18,8 @@ resource "local_file" "Variable" {
 	filename=var.filename
 	content=var.variable-type["content1"]
 }
+
+resource "local_file" "list" {
+	filename=var.file_list[0]
+	content=var.variable-type["content1"]
+}
