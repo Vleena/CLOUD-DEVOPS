@@ -1,5 +1,5 @@
 resource "local_file" "file" {
-	filename="/home/vleena1/CLOUD-DEVOPS/terraform-variable/test.txt"
+	filename="/home/test.txt"
 	content="This is Devops Test file"
 }
 
