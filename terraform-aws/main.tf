@@ -17,6 +17,6 @@ resource "aws_instance" "ec2" { # 'ec2' is the internal name for the resource
     instance_type = "t3.micro" 
     key_name = "mumbai-ec2-key"
     tags = {
-      Name = "Terraform-Ec2" # name of the Ec2 machine
+      Name = "Terraform-Ec2" # name of the Ec2 machine; here the key 'Name' is case sensitive
     }
 }
