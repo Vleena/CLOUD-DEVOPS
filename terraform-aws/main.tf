@@ -13,6 +13,7 @@ provider "aws" { # AWS configuration block
 }
 
 resource "aws_instance" "ec2" { # 'ec2' is the internal name for the resource
+    count=2 # create a two ec2 instances
     ami="ami-07a00cf47dbbc844c" # ubuntu AMI
     instance_type = "t3.micro" 
     key_name = "mumbai-ec2-key"
@@ -22,5 +23,7 @@ resource "aws_instance" "ec2" { # 'ec2' is the internal name for the resource
 }
 
 output "instance_IP" {
-    value = aws_instance.ec2.public_ip # get the public IP of the EC2 instance
+    # value = aws_instance.ec2.public_ip # get the public IP of the EC2 instance
+      value = aws_instance.ec2[*].public_ip # get the public IP of all the EC2 instances 
+	
 }
