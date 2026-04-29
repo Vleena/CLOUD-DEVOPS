@@ -20,3 +20,7 @@ resource "aws_instance" "ec2" { # 'ec2' is the internal name for the resource
       Name = "Terraform-Ec2" # name of the Ec2 machine; here the key 'Name' is case sensitive
     }
 }
+
+output "instance_IP" {
+    value = aws_instance.ec2.public_ip # get the public IP of the EC2 instance
+}
