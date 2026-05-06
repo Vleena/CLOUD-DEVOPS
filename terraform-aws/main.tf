@@ -16,7 +16,7 @@ resource "aws_instance" "ec2" { # 'ec2' is the internal name for the resource
     count=2 # create a two ec2 instances
     ami="ami-07a00cf47dbbc844c" # ubuntu AMI
     instance_type = "t3.micro" 
-    key_name = "mumbai-ec2-key"
+    key_name = "public-key"
     tags = {
       Name = "Terraform-Ec2" # name of the Ec2 machine; here the key 'Name' is case sensitive
     }
