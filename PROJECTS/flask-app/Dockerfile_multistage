@@ -1,0 +1,13 @@
+#stage1
+FROM python:3.12 AS flask_builder
+WORKDIR /app
+COPY . .
+#stage2
+FROM python:3.12-slim
+WORKDIR /new-app
+COPY --from=flask_builder /app /new-app
+RUN pip3 install flask
+EXPOSE 5000
+CMD ["python3","app.py"]
+
+
